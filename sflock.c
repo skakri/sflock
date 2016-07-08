@@ -90,7 +90,7 @@ main(int argc, char **argv) {
 
     // defaults
     char* passchar = "*";
-    char* fontname = "-*-dejavu sans-bold-r-*-*-*-420-100-100-*-*-iso8859-1";
+    char* fontname = "-*-dejavu sans-bold-r-*-*-*-90-100-100-*-*-iso8859-1";
     char* username = ""; 
     int showline = 1;
     int xshift = 0;
@@ -219,11 +219,6 @@ main(int argc, char **argv) {
             XTextExtents (font, passdisp, len, &dir, &ascent, &descent, &overall);
             x = (width - overall.width) / 2;
             y = (height + ascent - descent) / 2;
-
-            XDrawString(dpy,w,gc, (width - XTextWidth(font, username, strlen(username))) / 2 + xshift, y - ascent - 20, username, strlen(username));
-
-            if (showline)
-                XDrawLine(dpy, w, gc, width * 3 / 8 + xshift, y - ascent - 10, width * 5 / 8 + xshift, y - ascent - 10);
 
             XDrawString(dpy,w,gc, x + xshift, y, passdisp, len);
             update = False;
