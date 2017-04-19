@@ -22,8 +22,7 @@
 #include <X11/Xutil.h>
 #include <X11/extensions/dpms.h>
 
-static void
-die(const char *errstr, ...) {
+static void die(const char *errstr, ...) {
     va_list ap;
 
     va_start(ap, errstr);
@@ -32,8 +31,7 @@ die(const char *errstr, ...) {
     exit(EXIT_FAILURE);
 }
 
-static const char *
-get_password() { /* only run as root */
+static const char * get_password() { /* only run as root */
     const char *rval;
     struct passwd *pw;
 
@@ -58,8 +56,7 @@ get_password() { /* only run as root */
     return rval;
 }
 
-int
-main(int argc, char **argv) {
+int main(int argc, char **argv) {
     char curs[] = {0, 0, 0, 0, 0, 0, 0, 0};
     char buf[32], passwd[256];
     int num, screen, width, height, update, sleepmode, term, pid;
@@ -112,10 +109,8 @@ main(int argc, char **argv) {
         DefaultVisual(dpy, screen),
         CWOverrideRedirect | CWBackPixel, &wa);
 
-    XAllocNamedColor(
-        dpy, DefaultColormap(dpy, screen), "orange red", &red, &dummy);
-    XAllocNamedColor(
-        dpy, DefaultColormap(dpy, screen), "black", &black, &dummy);
+    XAllocNamedColor(dpy, DefaultColormap(dpy, screen), "#755", &red, &dummy);
+    XAllocNamedColor(dpy, DefaultColormap(dpy, screen), "#000", &black, &dummy);
     pmap = XCreateBitmapFromData(dpy, w, curs, 8, 8);
     invisible = XCreatePixmapCursor(dpy, pmap, pmap, &black, &black, 0, 0);
     XDefineCursor(dpy, w, invisible);
